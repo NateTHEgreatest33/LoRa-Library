@@ -1,7 +1,5 @@
 import time
 import spidev
-import random
-import datetime
 
 #SPI init
 
@@ -16,7 +14,7 @@ spi = spidev.SpiDev()
 # Open a connection to a specific bus and chip select pin
 spi.open(bus, CS)
 
-# Set SPI speed and mode
+# Set SPI speed (100kHz) and mode
 spi.max_speed_hz = 100000
 spi.mode = 0
 
@@ -148,7 +146,7 @@ def LoraSendMessage( messageList, messageSize):
         print(hex(x),end =" ")
     print("}")
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-#init the tranciver based
+#init the tranciver
 LoraInit()
 
 #put into Rx-continous mode
@@ -173,5 +171,7 @@ while True:
         SendMessage = [ 0x00, 0x01, 0x02, 0x03 ]
         
         LoraSendMessage(SendMessage, 4)
+        
+        #put back into Rx continous mode
         setRxMode()
       
